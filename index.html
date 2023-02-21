@@ -56,7 +56,8 @@
       // Listen for the message in the loaded page
       
       window.addEventListener("message", function (event) {
-        if (event.origin === "http://127.0.0.1:5500" && event.data) {
+        if (event.source === iframe.contentWindow) {
+          console.log("Received message from iframe:", event.data);
           const recievedData = event.data || [];
 
           if (recievedData.length) {
