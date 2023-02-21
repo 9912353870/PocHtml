@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    ul{
+        width: 60%;
+    }
+
+    li{
+        cursor: pointer;
+        list-style: none;
+        padding: 10px 20px;
+        background: #ced7ef;
+        margin: 10px 0;
+        box-shadow: 1px 1px 2px 0 ;
+    }
+  </style>
+  <body>
+    <script>
+      // Listen for the message in the loaded page
+
+      window.addEventListener("message", function (event) {
+        if (event.data) {
+          const recievedData = event.data || [];
+
+          if (recievedData.length) {
+            constructListItems(
+              recievedData,
+              document.getElementById("root-list")
+            );
+          }
+        }
+      });
+
+      function constructListItems(data, root) {
+        root.innerHTML = "";
+
+        for (let i = 0; i < data.length; i++) {
+          let item = data[i];
+          let liItem = document.createElement("li");
+          let spanItem = document.createElement("span");
+          let smallText = document.createElement("small");
+
+          spanItem.innerText = item.vehicle;
+          smallText.innerHTML = `${item.odometer} |  ${item.serviceDue}`;
+          liItem.appendChild(spanItem);
+          liItem.appendChild(document.createElement("br"))
+          liItem.appendChild(smallText)
+          root.appendChild(liItem);
+        }
+      }
+    </script>
+  </body>
+  <div>
+    <h1>Add services to selected vehicles</h1>
+    <div>
+      <h3>Service Request</h3>
+      <ul id="root-list"></ul>
+    </div>
+  </div>
+</html>
