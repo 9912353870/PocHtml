@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Services and Vehicles</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+    />
+    <style>
+      /* Set up the container div with flexbox */
+      #container {
+        display: flex;
+        justify-content: space-between;
+        align-items: stretch;
+        flex-wrap: wrap;
+        gap: 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 40px;
+      }
+
+      /* Set up the left and right columns */
+      #services {
+        flex-basis: 45%;
+        background-color: #fff;
+        border-radius: 8px;
+        padding: 20px;
+        box-sizing: border-box;
+        box-shadow: 0px 0px 3px 0px;
+      }
+
+      #vehicles {
+        flex-basis: 45%;
+        background-color: #fff;
+        border-radius: 8px;
+        padding: 20px;
+        box-sizing: border-box;
+        box-shadow: 0px 0px 3px 0px;
+      }
+
+      /* Style the headings */
+      h2 {
+        font-size: 24px;
+        margin-top: 0;
+        margin-bottom: 20px;
+      }
+
+      /* Style the vehicle list */
+      #services ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      #services li button {
+        background: #fff;
+        padding: 5px 15px;
+        border-radius: 20px;
+        text-transform: capitalize;
+        border-color: orangered;
+        color: darkslategrey;
+        font-weight: 700;
+      }
+
+      #services li {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin-bottom: 10px;
+        background: white;
+        padding: 10px 5px;
+        border-radius: 4px;
+        box-shadow: 0 0 1px 0 rgb(0 0 0);
+      }
+
+      #services label {
+        width: 80%;
+        margin-left: 10px;
+      }
+
+      #vehicles ul {
+        padding: 0;
+      }
+
+      #vehicles li {
+        list-style: none;
+        padding: 15px 5px;
+        border-bottom: 1px solid darkgrey;
+      }
+      #vehicles li small {
+        padding: 0px 20px;
+        font-size: 12px;
+        color: darkgray;
+      }
+      .inner-container {
+        background: #f4f4f4;
+        border-radius: 4px;
+        box-shadow: 0 0 1px 0px rgb(0 0 0);
+        margin-top: 20px;
+      }
+
+      /* Style the checkboxes */
+      input[type="checkbox"] {
+        margin-right: 10px;
+      }
+
+      /* Style the submit button */
+      #submit-button {
+        display: inline-block;
+        background-color: #4caf50;
+        color: #fff;
+        font-size: 16px;
+        font-weight: bold;
+        text-transform: uppercase;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+      }
+
+      #submit-button:hover {
+        background-color: #3e8e41;
+      }
+
+      /*css progress bar*/
+      .multi-steps > li.is-active ~ li:before,
+      .multi-steps > li.is-active:before {
+        content: counter(stepNum);
+        font-family: inherit;
+        font-weight: 700;
+      }
+      .multi-steps > li.is-active ~ li:after,
+      .multi-steps > li.is-active:after {
+        background-color: #ededed;
+      }
+
+      .multi-steps {
+        display: table;
+        table-layout: fixed;
+        width: 100%;
+      }
+      .multi-steps > li {
+        counter-increment: stepNum;
+        text-align: center;
+        display: table-cell;
+        position: relative;
+        color: tomato;
+      }
+      .multi-steps > li:before {
+        content: "";
+        content: "✓;";
+        content: "𐀃";
+        content: "𐀄";
+        content: "✓";
+        display: block;
+        margin: 0 auto 4px;
+        background-color: #fff;
+        width: 36px;
+        height: 36px;
+        line-height: 32px;
+        text-align: center;
+        font-weight: bold;
+        border-width: 2px;
+        border-style: solid;
+        border-color: tomato;
+        border-radius: 50%;
+      }
+      .multi-steps > li:after {
+        content: "";
+        height: 2px;
+        width: 100%;
+        background-color: tomato;
+        position: absolute;
+        top: 16px;
+        left: 50%;
+        z-index: -1;
+      }
+      .multi-steps > li:last-child:after {
+        display: none;
+      }
+      .multi-steps > li.is-active:before {
+        background-color: #fff;
+        border-color: tomato;
+      }
+      .multi-steps > li.is-active ~ li {
+        color: #808080;
+      }
+      .multi-steps > li.is-active ~ li:before {
+        background-color: #ededed;
+        border-color: #ededed;
+      }
+
+      .search-container {
+        display: flex;
+        align-items: center;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        padding: 4px;
+      }
+
+      .search-container input[type="text"] {
+        flex: 1;
+        border: none;
+        outline: none;
+      }
+
+      .search-container .icon-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 80px;
+        margin-left: 4px;
+      }
+
+      .search-container .icon-container i {
+        cursor: pointer;
+        margin: 0 4px;
+      }
+
+      .search-container .icon-container i.fa-search {
+        color: #007bff;
+      }
+      .search-bar-inner {
+        padding: 10px 5px;
+      }
+      .serviceHeader {
+        padding-left: 100px;
+        margin-bottom: 0;
+        padding-top: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <br /><br />
+      <ul class="list-unstyled multi-steps">
+        <li>Vehicles</li>
+        <li>Services</li>
+        <li>Schedule</li>
+        <li class="is-active">View & Send</li>
+      </ul>
+    </div>
+    <h2 class="serviceHeader">Add Services to the selected vehicles</h2>
+    <div id="container">
+      <div id="services">
+        <h4><span>&#9881;</span>All Services</h4>
+        <ul>
+          <li>
+            <label>Oil Change</label>
+            <button>Add</button>
+          </li>
+          <li>
+            <label>New Battery</label>
+            <button>Add</button>
+          </li>
+          <li>
+            <label>Battery Check</label>
+            <button>Add</button>
+          </li>
+          <li>
+            <label>Tire Service</label>
+            <button>Add</button>
+          </li>
+          <li>
+            <label>Parts services</label>
+            <button>Add</button>
+          </li>
+          <li>
+            <label>Break Inspection</label>
+            <button>Add</button>
+          </li>
+        </ul>
+      </div>
+      <div id="vehicles">
+        <div>Service Request</div>
+        <small>Clear and restart</small>
+        <div class="inner-container">
+          <div class="search-bar-inner">
+            <div class="search-container">
+              <input type="text" placeholder="Search vehicles" />
+              <span class="icon-container">
+                <i class="fas fa-sort-up"></i>
+                <i class="fas fa-sort-down"></i>
+                <i class="fas fa-times"></i>
+                <i class="fas fa-search"></i>
+              </span>
+            </div>
+          </div>
+
+          <ul id="root-list">
+          </ul>
+        </div>
+      </div>
+    </div>
+    <script>
+      // Listen for the message in the loaded page
+
+      window.addEventListener("message", function (event) {
+        if (event.data) {
+          const recievedData = event.data || [];
+
+          if (recievedData.length) {
+            //console.log(recievedData);
+            constructListItems(
+              recievedData,
+              document.getElementById("root-list")
+            );
+          }
+        }
+      });
+
+      function constructListItems(data, root) {
+        root.innerHTML = "";
+
+        for (let i = 0; i < data.length; i++) {
+          let item = data[i];
+          let liItem = document.createElement("li");
+          let labelItem = document.createElement("label");
+          let smallText = document.createElement("small");
+          let inputEle = document.createElement("input");
+          let textNode = document.createTextNode(item.vehicle);
+          inputEle.setAttribute("type", "checkbox");
+          inputEle.setAttribute("name", "Vehicle");
+          inputEle.setAttribute("value", item.vehicle);
+
+          labelItem.appendChild(inputEle);
+          labelItem.appendChild(textNode);
+          labelItem.appendChild(document.createElement("br"));
+          smallText.innerHTML = `${item.odometer} |  ${item.serviceDue}`;
+          labelItem.appendChild(smallText);
+          liItem.appendChild(labelItem);
+          root.appendChild(liItem);
+        }
+      }
+    </script>
+  </body>
+</html>
